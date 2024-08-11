@@ -15,9 +15,8 @@ jobs:
           --health-timeout 5s
           --health-retries 3
         env:
-          MYSQL_ROOT_PASSWORD: Ten@2106
-          MYSQL_DATABASE: systempharm
-
+          MYSQL_ROOT_PASSWORD: es2024.1
+          MYSQL_DATABASE: gerenciamentofarmacia
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3  
@@ -37,13 +36,13 @@ jobs:
             ${{ runner.os }}-maven-
           
       - name: Install Dependencies
-        working-directory: systempharm
+        working-directory: gerenciamentofarmacia
         run: mvn install --no-transfer-progress
 
       - name: Run Tests
-        working-directory: systempharm
+        working-directory: gerenciamentofarmacia
         env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/systempharm
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: Ten@2106
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/gerenciamentofarmacia
+          SPRING_DATASOURCE_USERNAME: projetoes
+          SPRING_DATASOURCE_PASSWORD: es2024.1
         run: mvn test
