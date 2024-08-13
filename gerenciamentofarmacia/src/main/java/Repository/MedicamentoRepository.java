@@ -12,7 +12,7 @@ public interface MedicamentoRepository extends JpaRepository<Medicamento, Long> 
 	    @Query("SELECT i FROM Medicamento i WHERE i.qtdEstoque = 0  ")
 	    List<Medicamento> findSemEstoque(); 
 		
-		/*medicamento vai precisar do atributo vencimento*/
+		/*medicamento necessita do atributo vencimento*/
 	    @Query("SELECT b FROM Medicamento b WHERE b.vencimento == False ")
 	    List<Medicamento> findByVencimento();
 }
