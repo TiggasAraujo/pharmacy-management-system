@@ -1,0 +1,1 @@
+INSERT INTO medicamento(data_entrada,precisa_receita,preco,qtd_estoque,validade,descricao,nome) VALUES ('2024-08-14', false,  15, 10, '2024-12-14', 'teste', 'Dipirona');

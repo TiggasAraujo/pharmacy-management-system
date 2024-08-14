@@ -1,13 +1,14 @@
 package br.com.farmacia.service;
+
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import Repository.MedicamentoRepository;
-import br.com.farmacia.models.Medicamento;
 import org.springframework.stereotype.Service;
+import br.com.farmacia.models.Medicamento;
+import br.com.farmacia.repository.MedicamentoRepository;
 
-public class ServiceMedicamento {
+@Service
+public class MedicamentoService {
 	
 	@Autowired
     private MedicamentoRepository medicamentoRepository;
@@ -27,7 +28,19 @@ public class ServiceMedicamento {
     }
     
     ///retorna os medicamentos de acodo com a data de validade
-    public List<Medicamento> findByVencimento() {
-        return this.medicamentoRepository.findByVencimento();
+    // public List<Medicamento> findByVencimento() {
+    //     return this.medicamentoRepository.findByVencimento();
+    // }
+
+    public List<Medicamento> buscarPorNome(String nome) {
+        return medicamentoRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    public Optional<Medicamento> buscarPorId(Long id) {
+        return medicamentoRepository.findById(id);
+    }
+
+    public List<Medicamento> listar() {
+        return medicamentoRepository.findAll();
     }
 }
