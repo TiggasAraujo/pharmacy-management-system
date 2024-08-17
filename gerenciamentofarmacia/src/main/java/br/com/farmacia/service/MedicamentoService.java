@@ -18,14 +18,14 @@ public class MedicamentoService {
     }
     
     //busca medicamentos faltando estoque
-    public List<Medicamento> findSemEstoque() {
-        return this.medicamentoRepository.findSemEstoque();
-    }
+    // public List<Medicamento> findSemEstoque() {
+    //     return this.medicamentoRepository.findSemEstoque();
+    // }
 
-    ///retorna todos os medicamentos que estao no estoque
-    public List<Medicamento> findByQtdEstoque() {
-        return this.medicamentoRepository.findByQtdEstoque();
-    }
+    // ///retorna todos os medicamentos que estao no estoque
+    // public List<Medicamento> findByQtdEstoque() {
+    //     return this.medicamentoRepository.findByQtdEstoque();
+    // }
     
     ///retorna os medicamentos de acodo com a data de validade
     // public List<Medicamento> findByVencimento() {
