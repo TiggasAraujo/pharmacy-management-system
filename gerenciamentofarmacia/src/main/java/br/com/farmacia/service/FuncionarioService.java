@@ -1,7 +1,8 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.models.Funcionario;
-import br.com.farmacia.Repository.FuncionarioRepository;
+import br.com.farmacia.repository.FuncionarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

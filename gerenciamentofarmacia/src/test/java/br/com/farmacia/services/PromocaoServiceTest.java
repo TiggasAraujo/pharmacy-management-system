@@ -3,10 +3,11 @@ package br.com.farmacia.services;
 import br.com.farmacia.models.Cliente;
 import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.models.Promocao;
+import br.com.farmacia.repository.ClienteRepository;
+import br.com.farmacia.repository.MedicamentoRepository;
+import br.com.farmacia.repository.PromocaoRepository;
 import br.com.farmacia.service.PromocaoService;
-import br.com.farmacia.Repository.ClienteRepository;
-import br.com.farmacia.Repository.MedicamentoRepository;
-import br.com.farmacia.Repository.PromocaoRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

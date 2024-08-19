@@ -1,7 +1,7 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.models.Estoque;
-import br.com.farmacia.Repository.EstoqueRepository;
+import br.com.farmacia.repository.EstoqueRepository;
 
 import java.util.List;
 import java.util.Optional;

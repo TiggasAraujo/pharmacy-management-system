@@ -4,10 +4,11 @@ import br.com.farmacia.models.Cliente;
 import br.com.farmacia.models.Gerente;
 import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.models.Promocao;
+import br.com.farmacia.repository.ClienteRepository;
+import br.com.farmacia.repository.GerenteRepository;
+import br.com.farmacia.repository.PromocaoRepository;
 import br.com.farmacia.service.GerenteService;
-import br.com.farmacia.Repository.ClienteRepository;
-import br.com.farmacia.Repository.GerenteRepository;
-import br.com.farmacia.Repository.PromocaoRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
