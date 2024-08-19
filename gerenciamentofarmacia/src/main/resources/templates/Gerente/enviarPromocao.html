@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enviar Promoção</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+    <div class="container">
+        <h1>Enviar Promoção</h1>
+        <form th:action="@{/enviarPromocao}" method="post">
+            <div class="form-group">
+                <label for="gerente">Gerente:</label>
+                <select id="gerente" name="gerente.id" class="form-control">
+                    <option value="" th:text="'Selecione um gerente'">Selecione um gerente</option>
+                    <option th:each="gerente : ${gerentes}" th:value="${gerente.id}" th:text="${gerente.nome}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="promocao">Promoção:</label>
+                <select id="promocao" name="promocao.id" class="form-control">
+                    <option value="" th:text="'Selecione uma promoção'">Selecione uma promoção</option>
+                    <option th:each="promocao : ${promocoes}" th:value="${promocao.id}" th:text="${promocao.descricao}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar Promoção</button>
+        </form>
+    </div>
+</body>
+</html>

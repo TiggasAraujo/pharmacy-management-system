@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Gerente</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+    <div class="container">
+        <h1>Cadastro de Gerente</h1>
+        <form th:action="@{/salvarGerente}" th:object="${gerente}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome do Gerente"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
+                    <label class="validation-message" th:errors="*{nome}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}">
+                    <label class="validation-message" th:errors="*{email}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" th:field="*{cpf}" class="form-control" placeholder="CPF"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cpf')}">
+                    <label class="validation-message" th:errors="*{cpf}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="salario">Salário:</label>
+                <input type="number" id="salario" th:field="*{salario}" class="form-control" placeholder="Salário"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('salario')}">
+                    <label class="validation-message" th:errors="*{salario}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dataAdmissao">Data de Admissão:</label>
+                <input type="date" id="dataAdmissao" th:field="*{dataAdmissao}" class="form-control"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataAdmissao')}">
+                    <label class="validation-message" th:errors="*{dataAdmissao}"></label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
