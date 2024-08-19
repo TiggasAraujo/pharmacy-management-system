@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class Medicamento {
 
     private String nome;
 
-    private BigDecimal preco;
+    private Double preco;
 
     private String descricao;
 
@@ -34,11 +33,15 @@ public class Medicamento {
 
     private LocalDate validade;
 
-    private LocalDate dataEntrada;
-
     @ManyToMany(mappedBy = "medicamentos")
     private List<Receita> receitas;
 
-    
+    public void aplicarDesconto(Double desconto) {
+        this.preco = this.preco - (this.preco * desconto);
+    }
+
+    public void removerDesconto(Double desconto) {
+        this.preco = this.preco + (this.preco * desconto);
+    }
 }
 
