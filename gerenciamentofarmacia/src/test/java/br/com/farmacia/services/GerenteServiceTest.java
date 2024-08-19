@@ -54,17 +54,17 @@ public class GerenteServiceTest {
         MockitoAnnotations.openMocks(this);
 
         // Criando um gerente de teste
-        gerente = new Gerente();
+        Gerente gerente = new Gerente();
         gerente.setId(1L);
         gerente.setNome("Gerente Teste");
 
-        medicamento = new Medicamento();
+        Medicamento medicamento = new Medicamento();
         medicamento.setNome("Paracetamol");
         medicamento.setPreco(10.00);
         medicamento.setId(1L);
         // Criando uma promoção de teste
 
-        promocao = new Promocao();
+        Promocao promocao = new Promocao();
         promocao.setId(1L);
         promocao.setMedicamento(medicamento);
         promocao.setDescricao("Promoção de Teste");
