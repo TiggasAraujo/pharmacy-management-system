@@ -6,11 +6,18 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Properties;
 
+
+
 @Configuration
 public class MailConfig {
+
+    // @Value("${spring.mail.Password}")
+    private String password;
+    
 
     @Bean
     public JavaMailSender javaMailSender() {
@@ -19,7 +26,7 @@ public class MailConfig {
         mailSender.setPort(587);
 
         mailSender.setUsername("engenhariadesoftware403@gmail.com");
-        mailSender.setPassword("wngq cxxe ypkr pbuv");
+        // mailSender.setPassword(password);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
