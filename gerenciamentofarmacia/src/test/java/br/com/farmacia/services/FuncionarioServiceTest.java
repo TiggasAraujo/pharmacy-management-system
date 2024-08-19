@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import br.com.farmacia.models.Farmaceutico;
 import br.com.farmacia.models.Gerente;
-import br.com.farmacia.repository.FuncionarioRepository;
+import br.com.farmacia.Repository.FuncionarioRepository;
 import br.com.farmacia.service.FuncionarioService;
 
 @SpringBootTest

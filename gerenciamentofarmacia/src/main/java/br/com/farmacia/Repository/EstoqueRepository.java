@@ -1,4 +1,4 @@
-package br.com.farmacia.repository;
+package br.com.farmacia.Repository;
 
 import java.util.Optional;
 
