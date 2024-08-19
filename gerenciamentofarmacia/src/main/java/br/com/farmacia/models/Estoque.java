@@ -23,8 +23,6 @@ public class Estoque {
 
     private LocalDate dataEntrada;
 
-    private LocalDate validade;
-
     @OneToOne
     private Medicamento medicamento;
 
