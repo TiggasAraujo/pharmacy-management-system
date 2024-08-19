@@ -49,12 +49,12 @@ public class PromocaoServiceTest {
         cliente.setEmail("raisanhacu@gmail.com");
 
         // Criando um medicamento de teste
-        Medicamento medicamento = new Medicamento();
+        medicamento = new Medicamento();
         medicamento.setNome("Paracetamol");
         medicamento.setPreco(10.00);
 
         // Criando uma promoção de teste
-        Promocao promocao = new Promocao();
+        promocao = new Promocao();
         promocao.setId(1L);
         promocao.setDescricao("Promoção de Verão");
         promocao.setDataInicio(LocalDate.now());
