@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Estoque</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/006642858d.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+
+    <div class="container" style="margin-top: 20px;">
+        <h1 th:text="${estoque.id != null} ? 'Editar Estoque' : 'Cadastrar Estoque'"></h1>
+
+        <form th:action="@{${estoque.id != null} ? '/editar' : '/registerEstoque'}" th:object="${estoque}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="qtdEstoque">Quantidade em Estoque:</label>
+                <input type="number" id="qtdEstoque" th:field="*{qtdEstoque}" class="form-control" placeholder="Ex: 100" />
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('qtdEstoque')}">
+                    <label class="validation-message" th:errors="*{qtdEstoque}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dataEntrada">Data de Entrada:</label>
+                <input type="date" id="dataEntrada" th:field="*{dataEntrada}" class="form-control" />
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataEntrada')}">
+                    <label class="validation-message" th:errors="*{dataEntrada}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="medicamento">Medicamento:</label>
+                <select id="medicamento" name="medicamentoId" th:field="*{medicamento.id}" class="form-control">
+                    <option value="" th:text="'Selecione um medicamento'">Selecione um medicamento</option>
+                    <option th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}" th:selected="${medicamento.id == estoque.medicamento.id}"></option>
+                </select>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('medicamento')}">
+                    <label class="validation-message" th:errors="*{medicamento}"></label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+
+        <a th:href="@{/estoques-adicionados}" class="btn btn-secondary mt-3">Voltar para Lista de Estoques</a>
+    </div>
+</body>
+</html>
