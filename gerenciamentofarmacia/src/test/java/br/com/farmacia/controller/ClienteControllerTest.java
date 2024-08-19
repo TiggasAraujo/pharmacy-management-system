@@ -1,7 +1,7 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.models.Cliente;
-import br.com.farmacia.Repository.ClienteRepository;
+import br.com.farmacia.repository.ClienteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

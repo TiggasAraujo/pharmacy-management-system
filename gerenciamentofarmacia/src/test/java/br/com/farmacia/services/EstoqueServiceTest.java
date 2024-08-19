@@ -2,7 +2,7 @@ package br.com.farmacia.services;
 
 import br.com.farmacia.models.Estoque;
 import br.com.farmacia.service.EstoqueService;
-import br.com.farmacia.Repository.EstoqueRepository;
+import br.com.farmacia.repository.EstoqueRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
