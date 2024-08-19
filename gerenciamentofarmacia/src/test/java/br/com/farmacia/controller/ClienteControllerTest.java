@@ -1,4 +1,4 @@
-package br.com.farmacia.controllers;
+package br.com.farmacia.controller;
 
 import br.com.farmacia.models.Cliente;
 import br.com.farmacia.Repository.ClienteRepository;

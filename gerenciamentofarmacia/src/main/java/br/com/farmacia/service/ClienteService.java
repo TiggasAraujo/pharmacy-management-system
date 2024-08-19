@@ -1,4 +1,4 @@
-package br.com.farmacia.services;
+package br.com.farmacia.service;
 
 import br.com.farmacia.models.Cliente;
 import br.com.farmacia.Repository.ClienteRepository;

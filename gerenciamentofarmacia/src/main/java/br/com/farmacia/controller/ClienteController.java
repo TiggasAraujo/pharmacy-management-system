@@ -1,7 +1,7 @@
-package br.com.farmacia.controllers;
+package br.com.farmacia.controller;
 
 import br.com.farmacia.models.Cliente;
-import br.com.farmacia.services.ClienteService;
+import br.com.farmacia.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

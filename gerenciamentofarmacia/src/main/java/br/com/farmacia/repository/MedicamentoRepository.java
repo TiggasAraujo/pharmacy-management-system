@@ -1,8 +1,7 @@
-package br.com.farmacia.repository;
+package br.com.farmacia.Repository;
 
 import br.com.farmacia.models.Medicamento;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MedicamentoRepository extends JpaRepository<Medicamento, Long> {
