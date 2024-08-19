@@ -44,17 +44,17 @@ public class PromocaoServiceTest {
         MockitoAnnotations.openMocks(this);
 
         // Criando um cliente de teste
-        cliente = new Cliente();
+        Cliente cliente = new Cliente();
         cliente.setNome("Raí");
         cliente.setEmail("raisanhacu@gmail.com");
 
         // Criando um medicamento de teste
-        medicamento = new Medicamento();
+        Medicamento medicamento = new Medicamento();
         medicamento.setNome("Paracetamol");
         medicamento.setPreco(10.00);
 
         // Criando uma promoção de teste
-        promocao = new Promocao();
+        Promocao promocao = new Promocao();
         promocao.setId(1L);
         promocao.setDescricao("Promoção de Verão");
         promocao.setDataInicio(LocalDate.now());

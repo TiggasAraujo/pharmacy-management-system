@@ -15,8 +15,9 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
+
     // @Value("${spring.mail.Password}")
-    private String password;
+
     
 
     @Bean
@@ -26,7 +27,9 @@ public class MailConfig {
         mailSender.setPort(587);
 
         mailSender.setUsername("engenhariadesoftware403@gmail.com");
+
         // mailSender.setPassword(password);
+
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
