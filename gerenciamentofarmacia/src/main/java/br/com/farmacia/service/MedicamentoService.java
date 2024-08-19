@@ -14,9 +14,7 @@ public class MedicamentoService {
 	@Autowired
     private MedicamentoRepository medicamentoRepository;
 
-    public void save(Medicamento medicamento) {
-        this.medicamentoRepository.save(medicamento);
-    }
+
     
     //busca medicamentos faltando estoque
     // public List<Medicamento> findSemEstoque() {
@@ -32,6 +30,21 @@ public class MedicamentoService {
     // public List<Medicamento> findByVencimento() {
     //     return this.medicamentoRepository.findByVencimento();
     // }
+
+    public List<Medicamento> findAll() {
+        return medicamentoRepository.findAll();
+    }
+    
+    public void save(Medicamento medicamento) {
+        this.medicamentoRepository.save(medicamento);
+    }
+    public Medicamento getById(Long id) {
+        return medicamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medicamento não encontrado"));
+    }
+
+    public void deleteById(Long id) {
+        medicamentoRepository.deleteById(id);
+    }
 
     public List<Medicamento> buscarPorNome(String nome) {
         return medicamentoRepository.findByNomeContainingIgnoreCase(nome);
