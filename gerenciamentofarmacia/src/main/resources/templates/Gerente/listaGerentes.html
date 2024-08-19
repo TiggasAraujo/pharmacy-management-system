@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Gerentes</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+    <div class="container">
+        <h1>Lista de Gerentes</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Salário</th>
+                    <th>Data de Admissão</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="gerente : ${gerentes}">
+                    <td th:text="${gerente.nome}"></td>
+                    <td th:text="${gerente.email}"></td>
+                    <td th:text="${gerente.cpf}"></td>
+                    <td th:text="${gerente.salario}"></td>
+                    <td th:text="${gerente.dataAdmissao}"></td>
+                    <td>
+                        <a th:href="@{/editarGerente(id=${gerente.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/deletarGerente(id=${gerente.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/cadastrarGerente" class="btn btn-primary">Adicionar Novo Gerente</a>
+    </div>
+</body>
+</html>
