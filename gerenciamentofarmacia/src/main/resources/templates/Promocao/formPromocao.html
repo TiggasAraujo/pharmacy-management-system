@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/Promocao/formPromocao.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Promoção</title>
+</head>
+<body>
+    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+    <h1 th:text="${promocao.id != null} ? 'Editar Promoção' : 'Criar Promoção'"></h1>
+
+    <form th:action="${promocao.id != null} ? @{/editarPromocao} : @{/criarPromocao}" th:object="${promocao}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" th:field="*{descricao}" />
+
+        <label for="dataInicio">Data de Início:</label>
+        <input type="date" id="dataInicio" th:field="*{dataInicio}" />
+
+        <label for="dataFim">Data de Fim:</label>
+        <input type="date" id="dataFim" th:field="*{dataFim}" />
+
+        <label for="desconto">Desconto (%):</label>
+        <input type="number" id="desconto" th:field="*{desconto}" step="0.01" />
+
+        <label for="medicamento">Medicamento:</label>
+        <select id="medicamento" name="medicamentoId" th:field="*{medicamento.id}">
+            <option th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}"></option>
+        </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+    
+    <a th:href="@{/promocoes}">Voltar para Lista de Promoções</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!-- src/main/resources/templates/Promocao/listaPromocoes.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Promoções</title>
+</head>
+<body>
+    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+    <h1>Promoções</h1>
+    
+    <a th:href="@{/criarPromocao}">Criar Nova Promoção</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Data Início</th>
+                <th>Data Fim</th>
+                <th>Desconto (%)</th>
+                <th>Medicamento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="promocao : ${promocoes}">
+                <td th:text="${promocao.descricao}"></td>
+                <td th:text="${promocao.dataInicio}"></td>
+                <td th:text="${promocao.dataFim}"></td>
+                <td th:text="${promocao.desconto}"></td>
+                <td th:text="${promocao.medicamento.nome}"></td>
+                <td>
+                    <a th:href="@{/editarPromocao/{id}(id=${promocao.id})}">Editar</a> |
+                    <form th:action="@{/removerPromocao}" method="post" style="display:inline;">
+                        <input type="hidden" th:name="promocaoId" th:value="${promocao.id}" />
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
