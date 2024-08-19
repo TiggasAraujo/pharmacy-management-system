@@ -1,4 +1,4 @@
-package br.com.farmacia.service;
+package br.com.farmacia.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -97,11 +97,11 @@ public class FuncionarioServiceTest {
         farmaceutico.setId(1L);
 
         Mockito.when(funcionarioRepository.findById(1L)).thenReturn(Optional.of(farmaceutico));
-        Mockito.doNothing().when(funcionarioRepository).delete(farmaceutico);
+        Mockito.doNothing().when(funcionarioRepository).deleteById(1L);
 
         funcionarioService.removerFuncionario(1L);
 
-        Mockito.verify(funcionarioRepository, Mockito.times(1)).delete(farmaceutico);
+        Mockito.verify(funcionarioRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
@@ -110,11 +110,11 @@ public class FuncionarioServiceTest {
         gerente.setId(2L);
 
         Mockito.when(funcionarioRepository.findById(2L)).thenReturn(Optional.of(gerente));
-        Mockito.doNothing().when(funcionarioRepository).delete(gerente);
+        Mockito.doNothing().when(funcionarioRepository).deleteById(2L);
 
         funcionarioService.removerFuncionario(2L);
 
-        Mockito.verify(funcionarioRepository, Mockito.times(1)).delete(gerente);
+        Mockito.verify(funcionarioRepository, Mockito.times(1)).deleteById(2L);
     }
 
 }
