@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GerenciamentofarmaciaApplication<gerenciamentofarmacia>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.farmacia.GerenciamentofarmaciaApplication",
+            "projectName": "gerenciamentofarmacia",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

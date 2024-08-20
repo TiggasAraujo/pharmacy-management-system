@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Clientes - Farmácia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="styleEdicao.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" id="home" href="/">Farmácia ES</a></h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/clientes">CLIENTES</a>
+            <a class="p-2 text-dark" href="/medicamentos">MEDICAMENTOS</a>
+            <a class="p-2 text-dark" href="/estoques-adicionados">ESTOQUE</a>
+            <a class="p-2 text-dark" href="/promocoes">PROMOÇÕES</a>
+            <a class="p-2 text-dark" href="/gerentes">GERENTES</a>
+        </nav>
+    </div>
+
+    <main role="main" class="container mt-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Lista de Clientes</h1>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.nome}"></td>
+                    <td th:text="${cliente.email}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td>
+                        <a th:href="@{/editarCliente(id=${cliente.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/deletarCliente(id=${cliente.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/registrarCliente" class="btn btn-primary">Adicionar Novo Cliente</a>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+</body>
+</html>
