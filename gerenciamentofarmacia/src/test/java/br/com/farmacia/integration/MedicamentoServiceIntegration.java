@@ -4,20 +4,20 @@ import br.com.farmacia.models.Estoque;
 import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.repository.MedicamentoRepository;
 import br.com.farmacia.service.MedicamentoService;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+//import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BooleanSupplier;
+//import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
