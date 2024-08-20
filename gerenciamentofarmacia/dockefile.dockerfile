@@ -1,14 +1,33 @@
-# Use a imagem oficial do OpenJDK como base
-FROM openjdk:17-jdk-alpine
+# Etapa de build
+FROM ubuntu:latest AS build
 
-# Defina o diretório de trabalho no contêiner
+# Atualiza a lista de pacotes e instala o OpenJDK e Maven
+RUN apt-get update && apt-get install -y openjdk-17-jdk maven
+
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Copie o jar do seu projeto para o diretório de trabalho
-COPY target/gerenciamentofarmacia-0.0.1-SNAPSHOT.jar app.jar
+# Copia o código-fonte e o arquivo pom.xml para o diretório de trabalho
+COPY . .
 
-# Exponha a porta que o Spring Boot vai rodar
+# Verifica o ambiente e versões
+RUN java -version
+RUN mvn -version
+
+# Executa o Maven para construir o projeto
+RUN mvn clean install
+
+# Etapa final
+FROM openjdk:17-jdk-slim
+
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Copia o JAR construído da etapa anterior
+COPY --from=build /app/target/gerenciamentofarmacia-0.0.1-SNAPSHOT.jar app.jar
+
+# Expõe a porta que a aplicação vai usar
 EXPOSE 8080
 
-# Defina o comando para rodar a aplicação
+# Define o comando para executar o JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
