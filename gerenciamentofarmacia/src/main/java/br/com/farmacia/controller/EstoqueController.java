@@ -85,6 +85,8 @@ public class EstoqueController {
         return modelAndView;
     }
 
+
+
     @GetMapping("/remover/{id}")
     public String removerEstoque(@PathVariable("id") Long id) {
         estoqueService.deleteByid(id);
