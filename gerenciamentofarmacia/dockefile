@@ -1,5 +1,5 @@
 # Etapa de build
-FROM ubuntu:latest AS build
+FROM ubuntu:22.04 AS build
 
 # Atualiza a lista de pacotes e instala o OpenJDK e Maven
 RUN apt-get update && apt-get install -y openjdk-17-jdk maven
@@ -18,7 +18,7 @@ RUN mvn -version
 RUN mvn clean install
 
 # Etapa final
-FROM openjdk:17-jdk-slim
+FROM openjdk:17.0.2-jdk-slim
 
 # Define o diretório de trabalho
 WORKDIR /app
