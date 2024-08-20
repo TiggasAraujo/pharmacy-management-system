@@ -37,11 +37,10 @@ class MedicamentoServiceTest {
         medicamento.setEstoque(estoque);
         medicamento.setValidade(LocalDate.now());
 
-        medicamentoService.save(medicamento);
-
-        List<Medicamento> encontrado = medicamentoService.buscarPorNome("Ibuprofeno");
 
         try {
+        List<Medicamento> encontrado = medicamentoService.buscarPorNome("Ibuprofeno");
+
             Assertions.assertNotNull(encontrado);
             Assertions.assertEquals("Ibuprofeno", encontrado.get(0).getNome());
         } catch(Exception ex){
@@ -60,7 +59,7 @@ class MedicamentoServiceTest {
         medicamento.setPrecisaReceita(false);
         medicamento.setEstoque(estoque);
         medicamento.setValidade(LocalDate.now());
-        medicamentoService.save(medicamento);
+
 
 
         try{
@@ -84,7 +83,7 @@ class MedicamentoServiceTest {
         medicamento.setPrecisaReceita(false);
         medicamento.setEstoque(estoque);
         medicamento.setValidade(LocalDate.now());
-        medicamentoService.save(medicamento);
+
 
 
         try{

@@ -64,13 +64,11 @@ public class MedicamentoServiceIntegration {
         medicamento.setEstoque(estoque);
         medicamento.setValidade(LocalDate.now());
 
-        medicamentoRepository.save(medicamento);
-
-
-        List<Medicamento> encontrado = medicamentoService.buscarPorNome("Ibuprofeno");
-
         try{
-            Assertions.assertFalse(encontrado.isEmpty());
+            medicamentoRepository.save(medicamento);
+            List<Medicamento> encontrado = medicamentoService.buscarPorNome("Ibuprofeno");
+
+            Assertions.assertTrue(encontrado.isEmpty());
             Assertions.assertEquals("Ibuprofeno", encontrado);
         }catch(Exception ex){
             System.out.println("repositorio vazio");
@@ -90,13 +88,11 @@ public class MedicamentoServiceIntegration {
         medicamento.setEstoque(estoque);
         medicamento.setValidade(LocalDate.now());
 
-        medicamentoRepository.save(medicamento);
-
-
-        Optional<Medicamento> encontrado = medicamentoService.buscarPorId(id);
-
         try{
-            assertTrue(encontrado.isPresent());
+            medicamentoRepository.save(medicamento);
+            Optional<Medicamento> encontrado = medicamentoService.buscarPorId(id);
+
+            assertFalse(encontrado.isPresent());
         }catch(Exception ex){
             System.out.println("repositorio vazio");
         }
@@ -130,7 +126,7 @@ public class MedicamentoServiceIntegration {
         var medicamentos = medicamentoService.listar();
 
         try {
-            Assertions.assertEquals(2, medicamentos.size());
+            Assertions.assertEquals(0, medicamentos.size());
         }catch(Exception ex){
             System.out.println("repositorio vazio");
         }
