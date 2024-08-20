@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Promoções - Farmácia</title>
+    <title>Lista de Medicamentos - Farmácia</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="styleEdicao.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" id="home" href="/">Farmácia ES</a></h5>
@@ -22,35 +24,37 @@
 
     <main role="main" class="container mt-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Lista de Promoções</h1>
+            <h1 class="h2">Lista de Medicamentos</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <a href="/medicamentos/cadastrar" class="btn btn-primary">Adicionar Novo Medicamento</a>
+                </div>
+            </div>
         </div>
-
-        <a href="/criarPromocao" class="btn btn-primary mb-3">Criar Nova Promoção</a>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Descrição</th>
-                    <th>Data Início</th>
-                    <th>Data Fim</th>
-                    <th>Desconto (%)</th>
-                    <th>Medicamento</th>
-                    <th>Ações</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Precisa Receita</th>
+                    <th scope="col">Validade</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="promocao : ${promocoes}">
-                    <td th:text="${promocao.descricao}"></td>
-                    <td th:text="${promocao.dataInicio}"></td>
-                    <td th:text="${promocao.dataFim}"></td>
-                    <td th:text="${promocao.desconto}"></td>
-                    <td th:text="${promocao.medicamento.nome}"></td>
+                <tr th:each="medicamento : ${medicamentos}">
+                    <td th:text="${medicamento.id}"></td>
+                    <td th:text="${medicamento.nome}"></td>
+                    <td th:text="${medicamento.preco}"></td>
+                    <td th:text="${medicamento.descricao}"></td>
+                    <td th:text="${medicamento.precisaReceita ? 'Sim' : 'Não'}"></td>
+                    <td th:text="${medicamento.validade}"></td>
                     <td>
-                        <a th:href="@{/editarPromocao/{id}(id=${promocao.id})}" class="btn btn-warning btn-sm">Editar</a>
-                        <form th:action="@{/removerPromocao}" method="post" style="display:inline;">
-                            <input type="hidden" name="promocaoId" th:value="${promocao.id}" />
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja remover?')">Excluir</button>
-                        </form>
+                        <a href="#" th:href="@{/medicamentos/editar/{id}(id=${medicamento.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="#" th:href="@{/medicamentos/remover/{id}(id=${medicamento.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                     </td>
                 </tr>
             </tbody>
@@ -59,4 +63,5 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </body>
+
 </html>

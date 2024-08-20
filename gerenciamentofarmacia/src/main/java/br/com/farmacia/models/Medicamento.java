@@ -28,10 +28,10 @@ public class Medicamento {
 
     private boolean precisaReceita;
 
+    private LocalDate validade;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Estoque estoque;
-
-    private LocalDate validade;
 
     @ManyToMany(mappedBy = "medicamentos")
     private List<Receita> receitas;
@@ -44,4 +44,3 @@ public class Medicamento {
         this.preco = this.preco + (this.preco * desconto);
     }
 }
-

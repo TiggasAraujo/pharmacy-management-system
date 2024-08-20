@@ -23,5 +23,10 @@ Este projeto envolve o desenvolvimento de um sistema de gerenciamento para farm�
 *   Versão 17
 ### [Spring Boot](https://spring.io/projects/spring-boot)
 *   Versão 3.3.2
+
+### [Codacy ](https://app.codacy.com/gh/ES-PHARMACY-PROJECT/pharmacy-management-system/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
+### [Render ]()
+
 ## :construction: Status do Projeto
 Em desenvolvimento

@@ -9,5 +9,4 @@ public class GerenciamentofarmaciaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GerenciamentofarmaciaApplication.class, args);
 	}
-
 }

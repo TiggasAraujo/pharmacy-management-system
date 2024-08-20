@@ -1,36 +1,79 @@
-<!-- src/main/resources/templates/Promocao/formPromocao.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Promoção</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${promocao.id != null} ? 'Editar Promoção' : 'Criar Promoção'">Promoção</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="styleEdicao.css" rel="stylesheet">
 </head>
-<body>
-    <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
-    <h1 th:text="${promocao.id != null} ? 'Editar Promoção' : 'Criar Promoção'"></h1>
+<body class="bg-light">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" id="home" href="/">Farmácia ES</a></h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/clientes">CLIENTES</a>
+            <a class="p-2 text-dark" href="/medicamentos">MEDICAMENTOS</a>
+            <a class="p-2 text-dark" href="/estoques-adicionados">ESTOQUE</a>
+            <a class="p-2 text-dark" href="/promocoes">PROMOÇÕES</a>
+            <a class="p-2 text-dark" href="/gerentes">GERENTES</a>
+        </nav>
+    </div>
 
-    <form th:action="${promocao.id != null} ? @{/editarPromocao} : @{/criarPromocao}" th:object="${promocao}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <main role="main" class="container mt-4">
+        <h1 class="mb-4" th:text="${promocao.id != null} ? 'Editar Promoção' : 'Criar Promoção'"></h1>
 
-        <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" th:field="*{descricao}" />
+        <form th:action="${promocao.id != null} ? @{/editarPromocao} : @{/criarPromocao}" th:object="${promocao}" method="post">
+            <input type="hidden" th:field="*{id}" />
 
-        <label for="dataInicio">Data de Início:</label>
-        <input type="date" id="dataInicio" th:field="*{dataInicio}" />
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" th:field="*{descricao}" class="form-control" placeholder="Descrição da Promoção"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('descricao')}">
+                    <label class="validation-message" th:errors="*{descricao}"></label>
+                </div>
+            </div>
 
-        <label for="dataFim">Data de Fim:</label>
-        <input type="date" id="dataFim" th:field="*{dataFim}" />
+            <div class="form-group">
+                <label for="dataInicio">Data de Início:</label>
+                <input type="date" id="dataInicio" th:field="*{dataInicio}" class="form-control"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataInicio')}">
+                    <label class="validation-message" th:errors="*{dataInicio}"></label>
+                </div>
+            </div>
 
-        <label for="desconto">Desconto (%):</label>
-        <input type="number" id="desconto" th:field="*{desconto}" step="0.01" />
+            <div class="form-group">
+                <label for="dataFim">Data de Fim:</label>
+                <input type="date" id="dataFim" th:field="*{dataFim}" class="form-control"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataFim')}">
+                    <label class="validation-message" th:errors="*{dataFim}"></label>
+                </div>
+            </div>
 
-        <label for="medicamento">Medicamento:</label>
-        <select id="medicamento" name="medicamentoId" th:field="*{medicamento.id}">
-            <option th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}"></option>
-        </select>
+            <div class="form-group">
+                <label for="desconto">Desconto (%):</label>
+                <input type="number" id="desconto" th:field="*{desconto}" step="0.01" class="form-control" placeholder="Desconto (%)"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('desconto')}">
+                    <label class="validation-message" th:errors="*{desconto}"></label>
+                </div>
+            </div>
 
-        <button type="submit">Salvar</button>
-    </form>
-    
-    <a th:href="@{/promocoes}">Voltar para Lista de Promoções</a>
+            <div class="form-group">
+                <label for="medicamento">Medicamento:</label>
+                <select id="medicamento" name="medicamentoId" th:field="*{medicamento.id}" class="form-control">
+                    <option th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}"></option>
+                </select>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('medicamento')}">
+                    <label class="validation-message" th:errors="*{medicamento}"></label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+
+        <a th:href="@{/promocoes}" class="btn btn-secondary mt-3">Voltar para Lista de Promoções</a>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </body>
 </html>

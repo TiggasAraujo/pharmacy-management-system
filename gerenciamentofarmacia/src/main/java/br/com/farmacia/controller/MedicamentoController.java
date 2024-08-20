@@ -1,47 +1,86 @@
 package br.com.farmacia.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.service.MedicamentoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/medicamentos")
 public class MedicamentoController {
 
     @Autowired
     private MedicamentoService medicamentoService;
 
-    @GetMapping("/search/{nome}")
-    public ResponseEntity<List<Medicamento>> buscarPorNome(@PathVariable String nome) {
-        List<Medicamento> medicamentos = medicamentoService.buscarPorNome(nome);
-        if (medicamentos.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(medicamentos);
-        }
+    @GetMapping("/cadastrar")
+    public ModelAndView cadastrarMedicamento() {
+        ModelAndView modelAndView = new ModelAndView("Medicamentos/formMedicamentos");
+        modelAndView.addObject("medicamento", new Medicamento());
+        return modelAndView;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Medicamento>> buscarPorId(@PathVariable Long id) {
-        Optional<Medicamento> medicamento = medicamentoService.buscarPorId(id);
-        if (medicamento.isEmpty()) {
-            return ResponseEntity.notFound().build();
+    @PostMapping("/cadastrar")
+    public ModelAndView salvarMedicamento(@Valid Medicamento medicamento, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("Medicamentos/formMedicamentos");
         } else {
-            return ResponseEntity.ok(medicamento);
+            medicamentoService.save(medicamento);
+            modelAndView.setViewName("redirect:/medicamentos");
         }
+        return modelAndView;
     }
 
-    @GetMapping()
-    public List<Medicamento> listar() {
-        return medicamentoService.listar();
+
+    @GetMapping("")
+    public ModelAndView listarMedicamentos() {
+    ModelAndView modelAndView = new ModelAndView("Medicamentos/listaMedicamentos");
+    List<Medicamento> medicamentos = medicamentoService.findAll();
+    modelAndView.addObject("medicamentos", medicamentos);
+    return modelAndView;
+    }
+
+
+    @GetMapping("/editar/{id}")
+public ModelAndView editarMedicamento(@PathVariable("id") Long id) {
+    ModelAndView modelAndView = new ModelAndView("Medicamentos/editMedicamentos");
+    Medicamento medicamento = medicamentoService.getById(id);
+
+    // Passa o medicamento existente para o formulário de edição
+    modelAndView.addObject("medicamento", medicamento);
+    return modelAndView;
+}
+
+@PostMapping("/atualizar")
+public ModelAndView atualizarMedicamento(@Valid Medicamento medicamento, BindingResult bindingResult) {
+    ModelAndView modelAndView = new ModelAndView();
+
+    if (bindingResult.hasErrors()) {
+        modelAndView.setViewName("Medicamentos/editMedicamentos");
+        return modelAndView;
+    }
+
+    try {
+        medicamentoService.save(medicamento); 
+        modelAndView.setViewName("redirect:/medicamentos");
+    } catch (Exception e) {
+        modelAndView.setViewName("error");
+        modelAndView.addObject("message", "Erro ao atualizar o medicamento.");
+    }
+
+    return modelAndView;
+}
+
+
+    @GetMapping("/remover/{id}")
+    public String removerMedicamento(@PathVariable("id") Long id) {
+        medicamentoService.deleteById(id);
+        return "redirect:/medicamentos";
     }
 }

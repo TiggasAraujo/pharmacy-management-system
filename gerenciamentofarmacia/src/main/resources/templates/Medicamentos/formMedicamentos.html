@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${estoque.id != null} ? 'Editar Estoque' : 'Cadastrar Estoque'">ESTOQUE - Farmácia</title>
+    <title>NOVO MEDICAMENTO - Farmácia</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="styleEdicao.css" rel="stylesheet">
 </head>
@@ -24,43 +24,39 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2" th:text="${estoque.id != null} ? 'Editar Estoque' : 'Cadastrar Estoque'"></h1>
+            <h1 class="h2">Adicionar Novo Medicamento</h1>
         </div>
 
-        <form th:action="@{${estoque.id != null} ? '/editar' : '/registerEstoque'}" th:object="${estoque}" method="post">
-            <input type="hidden" th:field="*{id}" />
-
+        <form th:action="@{/medicamentos/cadastrar}" th:object="${medicamento}" method="post">
             <div class="form-group">
-                <label for="qtdEstoque">Quantidade em Estoque:</label>
-                <input type="number" id="qtdEstoque" th:field="*{qtdEstoque}" class="form-control" placeholder="Ex: 100" />
-                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('qtdEstoque')}">
-                    <label class="validation-message" th:errors="*{qtdEstoque}"></label>
-                </div>
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome do Medicamento" required>
             </div>
-
             <div class="form-group">
-                <label for="dataEntrada">Data de Entrada:</label>
-                <input type="date" id="dataEntrada" th:field="*{dataEntrada}" class="form-control" />
-                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataEntrada')}">
-                    <label class="validation-message" th:errors="*{dataEntrada}"></label>
-                </div>
+                <label for="preco">Preço</label>
+                <input type="number" id="preco" th:field="*{preco}" class="form-control" placeholder="Preço" step="0.01" min="0" required>
             </div>
-
             <div class="form-group">
-                <label for="medicamento">Medicamento:</label>
-                <select id="medicamento" name="medicamentoId" th:field="*{medicamento.id}" class="form-control">
-                    <option value="" th:text="'Selecione um medicamento'">Selecione um medicamento</option>
-                    <option th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}" th:selected="${medicamento.id == estoque.medicamento.id}"></option>
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" th:field="*{descricao}" class="form-control" placeholder="Descrição"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="precisaReceita">Precisa Receita</label>
+                <select id="precisaReceita" th:field="*{precisaReceita}" class="form-control" required>
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
                 </select>
-                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('medicamento')}">
-                    <label class="validation-message" th:errors="*{medicamento}"></label>
+            </div>
+            <div class="form-group">
+                <label for="validade">Validade:</label>
+                <input type="date" id="validade" th:field="*{validade}" class="form-control" />
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('validade')}">
+                    <label class="validation-message" th:errors="*{validade}"></label>
                 </div>
             </div>
-
             <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/medicamentos" class="btn btn-secondary">Cancelar</a>
         </form>
-
-        <a th:href="@{/estoques-adicionados}" class="btn btn-secondary mt-3">Voltar para Lista de Estoques</a>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

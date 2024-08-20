@@ -57,4 +57,5 @@ public class MedicamentoService {
     public List<Medicamento> listar() {
         return medicamentoRepository.findAll();
     }
+
 }
