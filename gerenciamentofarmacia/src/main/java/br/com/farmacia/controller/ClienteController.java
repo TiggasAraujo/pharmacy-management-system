@@ -69,4 +69,17 @@ public class ClienteController {
         clienteService.removerCliente(id);
         return new ModelAndView("redirect:/clientes");
     }
+
+    // Adicionado: Busca de cliente por ID
+    @GetMapping("/Cliente/{id}")
+    public ModelAndView buscarClientePorId(@RequestParam Long id) {
+        ModelAndView modelAndView = new ModelAndView("Cliente/buscaCliente");
+        Cliente cliente = clienteService.listarClientes()
+                .stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
+        modelAndView.addObject("cliente", cliente);
+        return modelAndView;
+    }
 }

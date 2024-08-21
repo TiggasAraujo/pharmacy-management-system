@@ -45,15 +45,12 @@ public class ClienteControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     public void deveCriarNovoCliente() throws Exception {
         Mockito.when(clienteService.criarCliente(Mockito.any(Cliente.class))).thenReturn(cliente);
-        System.out.println("Teste iniciado");
-        mockMvc.perform(MockMvcRequestBuilders.post("/clientes")
-            .with(SecurityMockMvcRequestPostProcessors.csrf()) // Inclua o token CSRF
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/salvarCliente")
+            .with(SecurityMockMvcRequestPostProcessors.csrf())
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(cliente)))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value("José Wellington"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("jose@example.com"));
-
+            .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
     @Test
@@ -66,29 +63,30 @@ public class ClienteControllerTest {
 
         Mockito.when(clienteService.atualizarCliente(Mockito.anyLong(), Mockito.any(Cliente.class))).thenReturn(clienteAtualizado);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/clientes/{id}", 1L)
-        .with(SecurityMockMvcRequestPostProcessors.csrf()) // Inclua o token CSRF
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(clienteAtualizado)))
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value("José Wellington Atualizado"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("jose.atualizado@example.com"));
-
-    }
+        mockMvc.perform(MockMvcRequestBuilders.post("/atualizarCliente")
+            .with(SecurityMockMvcRequestPostProcessors.csrf())
+            .param("id", "1")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .flashAttr("cliente", clienteAtualizado)) // Enviando os dados como form
+            .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Esperando redirecionamento
+            .andExpect(MockMvcResultMatchers.redirectedUrl("/clientes")); // Verificando se redirecionou para a página de listagem
+}
 
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
     public void deveRemoverCliente() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/clientes/{id}", 1L)
-                .with(SecurityMockMvcRequestPostProcessors.csrf())) // Certifique-se de que a importação está correta
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+        mockMvc.perform(MockMvcRequestBuilders.get("/deletarCliente")
+                .param("id", "1")
+                .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
         Mockito.verify(clienteService).removerCliente(1L);
     }
 
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
-    public void deveListarClientes() throws Exception {
+    public void deveListarTodosClientes() throws Exception {
+        // Cria uma lista de clientes para o teste
         Cliente cliente1 = new Cliente();
         cliente1.setId(1L);
         cliente1.setNome("José Wellington");
@@ -100,13 +98,17 @@ public class ClienteControllerTest {
         cliente2.setEmail("maria@example.com");
 
         List<Cliente> clientes = Arrays.asList(cliente1, cliente2);
+
+        // Configura o mock do serviço para retornar a lista de clientes
         Mockito.when(clienteService.listarClientes()).thenReturn(clientes);
 
+        // Realiza a requisição GET para listar todos os clientes
         mockMvc.perform(MockMvcRequestBuilders.get("/clientes"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].nome").value("José Wellington"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("jose@example.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].nome").value("Maria Silva"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].email").value("maria@example.com"));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.model().attributeExists("clientes"))
+            .andExpect(MockMvcResultMatchers.model().attribute("clientes", clientes))
+            .andExpect(MockMvcResultMatchers.view().name("Cliente/listaClientes")); 
     }
+
+
 }
