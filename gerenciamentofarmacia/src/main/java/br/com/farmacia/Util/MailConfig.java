@@ -2,24 +2,17 @@ package br.com.farmacia.Util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-//import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Properties;
-
-
 
 @Configuration
 public class MailConfig {
 
-
-    // @Value("${spring.mail.Password}")
-
-    
+    @Value("${spring.mail.password}")
+    private String emailPassword;
 
     @Bean
     public JavaMailSender javaMailSender() {
@@ -29,8 +22,8 @@ public class MailConfig {
 
         mailSender.setUsername("engenhariadesoftware403@gmail.com");
 
-        // mailSender.setPassword(password);
-
+        // Use a senha que foi passada via vmArgs no launch.json
+        mailSender.setPassword(emailPassword);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
