@@ -30,7 +30,7 @@ Este projeto envolve o desenvolvimento de um sistema de gerenciamento para farmÃ
 
 ## ğŸŒ Render
 
-https://pharmacy-management-system-jh8i.onrender.com
+https://pharmacy-management-system-1-iavo.onrender.com
 
 ## :construction: Status do Projeto
 Em desenvolvimento
