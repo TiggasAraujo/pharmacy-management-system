@@ -1,5 +1,9 @@
 package br.com.farmacia.models;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,11 +12,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Gerente extends Funcionario {
-
-    private String departamento;
+    
 
 }

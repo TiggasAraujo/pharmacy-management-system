@@ -1,14 +1,22 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-GerenciamentofarmaciaApplication<gerenciamentofarmacia>",
+            "name": "Current File",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "GerenciamentofarmaciaApplication",
+            "request": "launch",
             "mainClass": "br.com.farmacia.GerenciamentofarmaciaApplication",
             "projectName": "gerenciamentofarmacia",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "vmArgs": "-Dspring.mail.password=wngqcxxeypkrpbuv"
         }
     ]
 }
