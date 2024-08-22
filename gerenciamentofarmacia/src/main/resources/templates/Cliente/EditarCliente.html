@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Cliente - Farmácia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="styleEdicao.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" id="home" href="/">Farmácia ES</a></h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/clientes">CLIENTES</a>
+            <a class="p-2 text-dark" href="/medicamentos">MEDICAMENTOS</a>
+            <a class="p-2 text-dark" href="/estoques-adicionados">ESTOQUE</a>
+            <a class="p-2 text-dark" href="/promocoes">PROMOÇÕES</a>
+            <a class="p-2 text-dark" href="/gerentes">GERENTES</a>
+        </nav>
+    </div>
+
+    <main role="main" class="container mt-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Editar Cliente</h1>
+        </div>
+
+        <form th:action="@{/atualizarCliente}" th:object="${cliente}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome do Cliente"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
+                    <label class="validation-message" th:errors="*{nome}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}">
+                    <label class="validation-message" th:errors="*{email}"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" th:field="*{cpf}" class="form-control" placeholder="CPF"/>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cpf')}">
+                    <label class="validation-message" th:errors="*{cpf}"></label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+</body>
+</html>
