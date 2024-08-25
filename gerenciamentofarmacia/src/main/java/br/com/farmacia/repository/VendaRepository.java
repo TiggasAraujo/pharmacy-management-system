@@ -10,7 +10,8 @@ import java.util.List;
 public interface VendaRepository extends JpaRepository<Venda, Long> {
 
 
-    public static List<Venda> findByClienteId(Long clienteId) {
+    @org.jetbrains.annotations.Contract(pure = true)
+    public static @Nullable List<Venda> findByClienteId(Long clienteId) {
         return null;
     }
 }
