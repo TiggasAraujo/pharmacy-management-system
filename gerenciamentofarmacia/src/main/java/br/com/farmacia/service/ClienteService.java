@@ -1,8 +1,10 @@
 package br.com.farmacia.service;
 
 import br.com.farmacia.models.Cliente;
+import br.com.farmacia.models.Venda;
 import br.com.farmacia.repository.ClienteRepository;
 import br.com.farmacia.exceptions.ResourceNotFoundException;
+import br.com.farmacia.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,9 @@ public class ClienteService {
 
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();
+    }
+
+    public List<Venda> getHistoricoCompras(Long clienteId) {
+        return VendaRepository.findByClienteId(clienteId);
     }
 }
