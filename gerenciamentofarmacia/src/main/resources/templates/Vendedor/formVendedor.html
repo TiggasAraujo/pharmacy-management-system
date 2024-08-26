@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Novo Vendedor - Farmácia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="styleEdicao.css" rel="stylesheet">
+</head>
+
+<body>
+    <div th:replace="static/fragmentos/header :: header"></div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Adicionar Novo Vendedor</h1>
+        </div>
+
+        <form th:action="@{/vendedores}" th:object="${vendedor}" method="post">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome do Vendedor" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email do Vendedor" required>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" th:field="*{cpf}" class="form-control" placeholder="CPF" required>
+            </div>
+            <div class="form-group">
+                <label for="salario">Salário</label>
+                <input type="number" id="salario" th:field="*{salario}" class="form-control" placeholder="Salário" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="dataAdmissao">Data de Admissão</label>
+                <input type="date" id="dataAdmissao" th:field="*{dataAdmissao}" class="form-control" />
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataAdmissao')}">
+                    <label class="validation-message" th:errors="*{dataAdmissao}"></label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/vendedores" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</body>
+
+</html>

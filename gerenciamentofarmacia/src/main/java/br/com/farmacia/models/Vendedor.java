@@ -1,19 +1,21 @@
 package br.com.farmacia.models;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
-//import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
-@Entity
+//@AllArgsConstructor
 @NoArgsConstructor
-//@AllArgsConstructor -> Se adicionar algum atributo no futuro, retirar o comentário
+@Entity
 public class Vendedor extends Funcionario {
-
     
-}
 
+}
