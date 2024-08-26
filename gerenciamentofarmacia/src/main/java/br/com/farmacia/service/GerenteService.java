@@ -39,8 +39,8 @@ public class GerenteService {
         promocaoRepository.save(promocao);
     }
 
-    public void enviarPromocaoParaClientes(Long gerenteId, Long promocaoId) {
-        Gerente gerente = gerenteRepository.findById(gerenteId).orElseThrow(() -> new IllegalArgumentException("Gerente não encontrado"));
+    public void enviarPromocaoParaClientes(/*Long gerenteId, */Long promocaoId) {
+        // Gerente gerente = gerenteRepository.findById(gerenteId).orElseThrow(() -> new IllegalArgumentException("Gerente não encontrado"));
         Promocao promocao = promocaoRepository.findById(promocaoId).orElseThrow(() -> new IllegalArgumentException("Promoção não encontrada"));
 
         List<Cliente> clientes = clienteRepository.findAll();
@@ -54,7 +54,9 @@ public class GerenteService {
                     "Temos uma nova promoção para você: " + promocao.getDescricao() + 
                     "\nDesconto: " + promocao.getDesconto() * 100+ "% no medicamento: " + promocao.getMedicamento().getNome() + 
                     "\nVálida de: " + promocao.getDataInicio() + " até " + promocao.getDataFim() + 
-                    "\n\nAproveite!\n" + gerente.getNome());
+                    "\n\nAproveite!\n"
+                    // + gerente.getNome())
+            );
 
             mailSender.send(message);
         }

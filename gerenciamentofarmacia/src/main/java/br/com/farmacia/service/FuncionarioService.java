@@ -34,4 +34,9 @@ public class FuncionarioService {
     public Optional<Funcionario> buscarFuncionarioPorId(Long id) {
         return funcionarioRepository.findById(id);
     }
+
+    //save
+    public Funcionario save(Funcionario funcionario) {
+        return funcionarioRepository.save(funcionario);
+    }
 }
