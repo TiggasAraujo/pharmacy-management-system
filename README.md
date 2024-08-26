@@ -26,7 +26,7 @@ Este projeto envolve o desenvolvimento de um sistema de gerenciamento para farm�
 
 ## 📈 Codacy
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/64115146cd014ff98bb31bd42d3b9a31)](https://app.codacy.com/gh/ES-PHARMACY-PROJECT/pharmacy-management-system/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dadba56768ec48c69fdf9984c32310c3)](https://app.codacy.com/gh/ES-PHARMACY-PROJECT/pharmacy-management-system/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## 🌐 Render
 
