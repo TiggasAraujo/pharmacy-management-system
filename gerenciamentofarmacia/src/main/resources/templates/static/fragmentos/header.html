@@ -15,7 +15,19 @@
             <a class="p-2 text-dark" href="/gerentes">GERENTE</a>
             <a class="p-2 text-dark" href="/vendas/listar">VENDAS</a>
             <!-- <span th:text="${user.funcionario.getNome()}"></span>  -->
+            <form id="logout-form" action="/logout" method="post" style="display:inline;">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> <!-- Token CSRF -->
+                <button type="submit" class="btn btn-danger ml-3" onclick="confirmLogout(event)">Logout</button>
+            </form>  
         </nav>
+        <script>
+            function confirmLogout(event) {
+                event.preventDefault(); // Previne o comportamento padrão do botão
+                if (confirm("Você tem certeza que deseja sair?")) {
+                    document.getElementById('logout-form').submit(); // Envia o formulário de logout se o usuário confirmar
+                }
+            }
+        </script>
     </div>
 </body>
 </html>
