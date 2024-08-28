@@ -14,6 +14,7 @@
             th:if="${user.funcionario.getClass().getSimpleName().equals('Gerente')}">GERENTES</a> -->
             <a class="p-2 text-dark" href="/gerentes">GERENTE</a>
             <a class="p-2 text-dark" href="/vendas/listar">VENDAS</a>
+
             <!-- <span th:text="${user.funcionario.getNome()}"></span>  -->
             <form id="logout-form" action="/logout" method="post" style="display:inline;">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> <!-- Token CSRF -->
