@@ -28,4 +28,13 @@ public class VendedorService {
     public void excluir(Long id) {
         vendedorRepository.deleteById(id);
     }
+
+    public Object findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    }
+
+    public List<Vendedor> buscarTodosVendedores() {
+        return vendedorRepository.findAll();
+    }
 }

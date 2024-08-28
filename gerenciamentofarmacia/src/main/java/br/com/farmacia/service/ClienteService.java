@@ -50,4 +50,13 @@ public class ClienteService {
     public List<Venda> getHistoricoCompras(Long clienteId) {
         return VendaRepository.findByClienteId(clienteId);
     }
+
+    public Object findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    }
+
+    public List<Cliente> buscarTodosClientes() {
+        return clienteRepository.findAll();
+    }
 }
