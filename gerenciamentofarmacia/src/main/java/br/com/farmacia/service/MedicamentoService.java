@@ -58,4 +58,9 @@ public class MedicamentoService {
         return medicamentoRepository.findAll();
     }
 
+   
+    public List<Medicamento> buscarTodosMedicamentos() {
+        return medicamentoRepository.findAll();
+    }
+
 }

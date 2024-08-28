@@ -35,4 +35,8 @@ public class EstoqueService {
         return this.estoqueRepository.findById(id).get();
     }
 
+    public void salvarEstoque(Estoque estoque) {
+        estoqueRepository.save(estoque);
+    }
+
 }

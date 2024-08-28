@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 @Controller
@@ -83,4 +84,5 @@ public ModelAndView atualizarMedicamento(@Valid Medicamento medicamento, Binding
         medicamentoService.deleteById(id);
         return "redirect:/medicamentos";
     }
+
 }
