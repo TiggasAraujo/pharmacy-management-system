@@ -1,7 +1,10 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.models.Cliente;
+import br.com.farmacia.models.Venda;
 import br.com.farmacia.service.ClienteService;
+import br.com.farmacia.service.VendaService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +36,9 @@ public class ClienteControllerTest {
 
     private Cliente cliente;
 
+    @MockBean
+    private VendaService vendaService;
+
     @BeforeEach
     public void setUp() {
         cliente = new Cliente();
@@ -45,13 +51,16 @@ public class ClienteControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     public void deveCriarNovoCliente() throws Exception {
         Mockito.when(clienteService.criarCliente(Mockito.any(Cliente.class))).thenReturn(cliente);
-
+    
         mockMvc.perform(MockMvcRequestBuilders.post("/salvarCliente")
             .with(SecurityMockMvcRequestPostProcessors.csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(cliente)))
-            .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED) // Ajustado para FORM_URLENCODED
+            .param("nome", cliente.getNome())
+            .param("email", cliente.getEmail())) // Ajuste conforme necessário
+            .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+            .andExpect(MockMvcResultMatchers.redirectedUrl("/clientes"));
     }
+    
 
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
@@ -67,11 +76,12 @@ public class ClienteControllerTest {
             .with(SecurityMockMvcRequestPostProcessors.csrf())
             .param("id", "1")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .flashAttr("cliente", clienteAtualizado)) // Enviando os dados como form
-            .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Esperando redirecionamento
-            .andExpect(MockMvcResultMatchers.redirectedUrl("/clientes")); // Verificando se redirecionou para a página de listagem
-}
+            .flashAttr("cliente", clienteAtualizado))
+            .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+            .andExpect(MockMvcResultMatchers.redirectedUrl("/clientes"));
+    }
 
+    
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
     public void deveRemoverCliente() throws Exception {
@@ -86,7 +96,6 @@ public class ClienteControllerTest {
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
     public void deveListarTodosClientes() throws Exception {
-        // Cria uma lista de clientes para o teste
         Cliente cliente1 = new Cliente();
         cliente1.setId(1L);
         cliente1.setNome("José Wellington");
@@ -99,16 +108,14 @@ public class ClienteControllerTest {
 
         List<Cliente> clientes = Arrays.asList(cliente1, cliente2);
 
-        // Configura o mock do serviço para retornar a lista de clientes
         Mockito.when(clienteService.listarClientes()).thenReturn(clientes);
 
-        // Realiza a requisição GET para listar todos os clientes
         mockMvc.perform(MockMvcRequestBuilders.get("/clientes"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.model().attributeExists("clientes"))
             .andExpect(MockMvcResultMatchers.model().attribute("clientes", clientes))
-            .andExpect(MockMvcResultMatchers.view().name("Cliente/listaClientes")); 
+            .andExpect(MockMvcResultMatchers.view().name("Cliente/listaClientes"));
     }
 
-
+   
 }

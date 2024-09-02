@@ -5,11 +5,14 @@ import br.com.farmacia.models.Funcionario;
 import br.com.farmacia.models.Gerente;
 import br.com.farmacia.models.Promocao;
 import br.com.farmacia.models.User;
+import br.com.farmacia.models.Venda;
 import br.com.farmacia.models.Vendedor;
 import br.com.farmacia.service.FuncionarioService;
 import br.com.farmacia.service.GerenteService;
 import br.com.farmacia.service.PromocaoService;
 import br.com.farmacia.service.UserService;
+import br.com.farmacia.service.VendaService;
+import br.com.farmacia.service.VendedorService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -37,6 +40,12 @@ public class GerenteController {
 
     @Autowired
     private FuncionarioService funcionarioService;
+
+    @Autowired
+    private VendaService vendaService;
+
+    @Autowired
+    private VendedorService vendedorService;
 
     @Autowired
     private UserService userService;
@@ -191,6 +200,24 @@ public class GerenteController {
     public String deleteEmployee(@RequestParam("id") Long id) {
         userService.deleteById(id);
         return "redirect:/gerentes"; // Redireciona para a lista de funcionários
+    }
+
+    @GetMapping("/{vendedorId}/historico")
+    public ModelAndView getHistoricoVendas(@PathVariable("vendedorId") Long vendedorId) {
+        ModelAndView modelAndView = new ModelAndView("User/historicoVendas");
+
+        // Busca o vendedor pelo ID
+        Vendedor vendedor = vendedorService.buscarPorId(vendedorId);
+
+        // Busca o histórico de vendas do vendedor
+        List<Venda> vendas = vendaService.buscarVendasPorVendedor(vendedor);
+
+        // Adiciona o vendedor e as vendas ao modelo
+        modelAndView.addObject("vendedor", vendedor);
+        modelAndView.addObject("vendas", vendas);
+
+        // Retorna a view que exibirá o histórico de vendas
+        return modelAndView;
     }
 
 }

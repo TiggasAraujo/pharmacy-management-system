@@ -1,13 +1,14 @@
 package br.com.farmacia.service;
 
+import br.com.farmacia.models.Cliente;
 import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.models.Venda;
+import br.com.farmacia.models.Vendedor;
 import br.com.farmacia.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -47,5 +48,15 @@ public Venda salvarVenda(Venda venda) {
 
     public List<Venda> buscarTodasVendas() {
         return vendaRepository.findAll();
+    }
+
+    // Novo método para buscar todas as vendas de um cliente
+    public List<Venda> buscarVendasPorCliente(Cliente cliente) {
+        return vendaRepository.findByCliente(cliente);
+    }
+
+    // Novo método para buscar todas as vendas de um vendedor
+    public List<Venda> buscarVendasPorVendedor(Vendedor vendedor) {
+        return vendaRepository.findByVendedor(vendedor);
     }
 }

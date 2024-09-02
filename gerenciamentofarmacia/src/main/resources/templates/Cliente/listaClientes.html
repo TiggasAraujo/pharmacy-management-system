@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lista de Clientes - Farmácia</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="styleEdicao.css" rel="stylesheet">
 </head>
 
 <body>
     <div th:replace="~{static/fragmentos/header :: header}"></div>
     <main role="main" class="container mt-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Lista de Clientes</h1>
         </div>
 
@@ -32,7 +35,12 @@
                     <td th:text="${cliente.cpf}"></td>
                     <td>
                         <a th:href="@{/editarCliente(id=${cliente.id})}" class="btn btn-warning btn-sm">Editar</a>
-                        <a th:href="@{/deletarCliente(id=${cliente.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>
+                        <a th:href="@{/deletarCliente(id=${cliente.id})}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>
+                        <!-- Botão de Ver Compras -->
+                        <!-- Corrija o href para chamar a URL correta no ClienteController -->
+                        <a th:href="@{/clientes/{clienteId}/compras(clienteId=${cliente.id})}"
+                            class="btn btn-info btn-sm">Ver Compras</a>
                     </td>
                 </tr>
             </tbody>
@@ -40,6 +48,9 @@
         <a href="/registrarCliente" class="btn btn-primary">Adicionar Novo Cliente</a>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

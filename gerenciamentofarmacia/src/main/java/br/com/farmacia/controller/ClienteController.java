@@ -3,6 +3,8 @@ package br.com.farmacia.controller;
 import br.com.farmacia.models.Cliente;
 import br.com.farmacia.models.Venda;
 import br.com.farmacia.service.ClienteService;
+import br.com.farmacia.service.VendaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private VendaService vendaService;
 
     @GetMapping("/clientes")
     public ModelAndView listarClientes() {
@@ -81,18 +86,26 @@ public class ClienteController {
         return modelAndView;
     }
 
-    @GetMapping("/{clienteId}/compras")
-    public ModelAndView getHistoricoCompras(@PathVariable("clienteId") Long clienteId) {
+    @GetMapping("/clientes/{clienteId}/compras")
+public ModelAndView getHistoricoCompras(@PathVariable("clienteId") Long clienteId) {
+    ModelAndView modelAndView = new ModelAndView("Cliente/comprasCliente");
 
-        ModelAndView modelAndView = new ModelAndView("Cliente/comprasCliente");
+    // Busca o cliente pelo ID
+    Cliente cliente = clienteService.buscarPorId(clienteId);
 
-        // Chama o serviço para obter o histórico de compras do cliente
-        List<Venda> historicoCompras = clienteService.getHistoricoCompras(clienteId);
+    // Busca o histórico de compras do cliente
+    List<Venda> vendas = vendaService.buscarVendasPorCliente(cliente);
 
-        // Adiciona a lista de compras ao modelo para ser acessada na view
-        modelAndView.addObject("compras", historicoCompras);
+    // Adiciona o cliente e as vendas ao modelo
+    modelAndView.addObject("cliente", cliente);
+    modelAndView.addObject("vendas", vendas);
 
-        // Retorna o nome da view que exibirá o histórico de compras
-        return modelAndView;
-    }
+    // Retorna a view que exibirá o histórico de compras
+    return modelAndView;
+}
+
+
+    
+
+    
 }
