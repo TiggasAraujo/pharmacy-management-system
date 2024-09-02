@@ -1,7 +1,9 @@
 package br.com.farmacia.controller;
 
+import br.com.farmacia.models.Cliente;
 import br.com.farmacia.models.ItemVenda;
 import br.com.farmacia.models.Venda;
+import br.com.farmacia.models.Vendedor;
 import br.com.farmacia.service.ClienteService;
 import br.com.farmacia.service.MedicamentoService;
 import br.com.farmacia.service.VendaService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -32,15 +35,15 @@ public class VendaController {
     private MedicamentoService medicamentoService;
 
     @GetMapping("/nova")
-public String mostrarFormularioVenda(Model model) {
-    Venda venda = new Venda();
-    venda.getItens().add(new ItemVenda()); // Adiciona um item por padrão
-    model.addAttribute("venda", venda);
-    model.addAttribute("clientes", clienteService.buscarTodosClientes());
-    model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
-    model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
-    return "Vendas/formVendas";
-}
+    public String mostrarFormularioVenda(Model model) {
+        Venda venda = new Venda();
+        venda.getItens().add(new ItemVenda()); // Adiciona um item por padrão
+        model.addAttribute("venda", venda);
+        model.addAttribute("clientes", clienteService.buscarTodosClientes());
+        model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
+        model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
+        return "Vendas/formVendas";
+    }
 
     @PostMapping("/salvar")
     public String salvarVenda(@Valid @ModelAttribute Venda venda, BindingResult result, Model model) {
@@ -72,7 +75,8 @@ public String mostrarFormularioVenda(Model model) {
     }
 
     @PostMapping("/editar/{id}")
-    public String editarVenda(@PathVariable("id") Long id, @Valid @ModelAttribute Venda venda, BindingResult result, Model model) {
+    public String editarVenda(@PathVariable("id") Long id, @Valid @ModelAttribute Venda venda, BindingResult result,
+            Model model) {
         if (result.hasErrors()) {
             venda.setId(id);
             model.addAttribute("clientes", clienteService.buscarTodosClientes());
@@ -89,4 +93,7 @@ public String mostrarFormularioVenda(Model model) {
         vendaService.excluirVenda(id);
         return "redirect:/vendas/listar";
     }
+
+    
+
 }

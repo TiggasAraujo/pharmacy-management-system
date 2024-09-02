@@ -37,4 +37,6 @@ public class VendedorService {
     public List<Vendedor> buscarTodosVendedores() {
         return vendedorRepository.findAll();
     }
+
+    
 }

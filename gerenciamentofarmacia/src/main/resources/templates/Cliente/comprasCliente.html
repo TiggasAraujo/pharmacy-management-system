@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras do Cliente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="~{static/fragmentos/header :: header}"></div>
+    <div class="container mt-5">
+        <h1 class="mb-4">Compras de <span th:text="${cliente.nome}"></span></h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Valor Total</th>
+                    <th>Vendedor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="venda : ${vendas}">
+                    <td th:text="${venda.data}"></td>
+                    <td th:text="${venda.valorTotal}"></td>
+                    <td th:text="${venda.vendedor.nome}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/clientes" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
+</body>
+</html>
