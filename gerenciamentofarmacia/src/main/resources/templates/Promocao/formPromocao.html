@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div th:replace="static/fragmentos/header :: header"></div>
+    <div th:replace="~{static/fragmentos/header :: header}"></div>
     <main role="main" class="container mt-4">
         <h1 class="mb-4" th:text="${promocao.id != null} ? 'Editar Promoção' : 'Criar Promoção'"></h1>
 

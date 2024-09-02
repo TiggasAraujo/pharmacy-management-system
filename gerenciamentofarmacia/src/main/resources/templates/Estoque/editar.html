@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div th:replace="static/fragmentos/header :: header"></div>
+    <div th:replace="~{static/fragmentos/header :: header}"></div>
     <div class="container">
         <h1>Editar Estoque</h1>
         <form th:action="@{/editar}" th:object="${estoque}" method="post">

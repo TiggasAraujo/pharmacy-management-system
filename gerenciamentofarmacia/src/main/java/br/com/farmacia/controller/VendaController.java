@@ -1,11 +1,11 @@
 package br.com.farmacia.controller;
 
+import br.com.farmacia.models.ItemVenda;
 import br.com.farmacia.models.Venda;
 import br.com.farmacia.service.ClienteService;
 import br.com.farmacia.service.MedicamentoService;
 import br.com.farmacia.service.VendaService;
 import br.com.farmacia.service.VendedorService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ public class VendaController {
     @Autowired
     private VendaService vendaService;
 
-     @Autowired
+    @Autowired
     private ClienteService clienteService;
 
     @Autowired
@@ -32,17 +32,22 @@ public class VendaController {
     private MedicamentoService medicamentoService;
 
     @GetMapping("/nova")
-    public String mostrarFormularioVenda(Model model) {
-        model.addAttribute("venda", new Venda());
-        model.addAttribute("clientes", clienteService.buscarTodosClientes());
-        model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
-        model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
-        return "Vendas/formVendas";
-    }
+public String mostrarFormularioVenda(Model model) {
+    Venda venda = new Venda();
+    venda.getItens().add(new ItemVenda()); // Adiciona um item por padrão
+    model.addAttribute("venda", venda);
+    model.addAttribute("clientes", clienteService.buscarTodosClientes());
+    model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
+    model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
+    return "Vendas/formVendas";
+}
 
     @PostMapping("/salvar")
-    public String salvarVenda(@Valid Venda venda, BindingResult result, Model model) {
+    public String salvarVenda(@Valid @ModelAttribute Venda venda, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("clientes", clienteService.buscarTodosClientes());
+            model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
+            model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
             return "Vendas/formVendas";
         }
         vendaService.salvarVenda(venda);
@@ -60,13 +65,19 @@ public class VendaController {
     public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model) {
         Venda venda = vendaService.buscarPorId(id);
         model.addAttribute("venda", venda);
+        model.addAttribute("clientes", clienteService.buscarTodosClientes());
+        model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
+        model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
         return "Vendas/editVendas";
     }
 
     @PostMapping("/editar/{id}")
-    public String editarVenda(@PathVariable("id") Long id, @Valid Venda venda, BindingResult result, Model model) {
+    public String editarVenda(@PathVariable("id") Long id, @Valid @ModelAttribute Venda venda, BindingResult result, Model model) {
         if (result.hasErrors()) {
             venda.setId(id);
+            model.addAttribute("clientes", clienteService.buscarTodosClientes());
+            model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
+            model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
             return "Vendas/editVendas";
         }
         vendaService.salvarVenda(venda);
@@ -78,6 +89,4 @@ public class VendaController {
         vendaService.excluirVenda(id);
         return "redirect:/vendas/listar";
     }
-
-    
 }
