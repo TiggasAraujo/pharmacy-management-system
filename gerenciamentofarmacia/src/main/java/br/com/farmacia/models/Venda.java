@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,13 +29,9 @@ public class Venda {
     @ManyToOne
     private Vendedor vendedor;
 
-    //Cascade: todas as operações de persistência aplicadas na entidade Venda serão
-    //automaticamente aplicadas aos ItemVenda associados
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ItemVenda> itens;
-
-    private BigDecimal valorTotal;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemVenda> itens = new ArrayList<>();
 
     
+    private double valorTotal;
 }
-

@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,8 +22,4 @@ public class ItemVenda {
 
     private int quantidade;
 
-    private BigDecimal precoPorItem;
-
-   
 }
-
