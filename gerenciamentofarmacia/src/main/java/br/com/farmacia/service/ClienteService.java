@@ -17,6 +17,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private VendaRepository vendaRepository;
+
     public Cliente criarCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
@@ -48,7 +51,7 @@ public class ClienteService {
     }
 
     public List<Venda> getHistoricoCompras(Long clienteId) {
-        return VendaRepository.findByClienteId(clienteId);
+        return vendaRepository.findByClienteId(clienteId);
     }
 
     public Object findAll() {
