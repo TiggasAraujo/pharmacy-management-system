@@ -81,8 +81,18 @@ public class ClienteController {
         return modelAndView;
     }
 
-    @GetMapping("/{id}/compras")
-    public List<Venda> getHistoricoCompras(@PathVariable Long id) {
-        return clienteService.getHistoricoCompras(id);
+    @GetMapping("/{clienteId}/compras")
+    public ModelAndView getHistoricoCompras(@PathVariable("clienteId") Long clienteId) {
+
+        ModelAndView modelAndView = new ModelAndView("Cliente/comprasCliente");
+
+        // Chama o serviço para obter o histórico de compras do cliente
+        List<Venda> historicoCompras = clienteService.getHistoricoCompras(clienteId);
+
+        // Adiciona a lista de compras ao modelo para ser acessada na view
+        modelAndView.addObject("compras", historicoCompras);
+
+        // Retorna o nome da view que exibirá o histórico de compras
+        return modelAndView;
     }
 }
