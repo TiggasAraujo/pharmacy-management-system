@@ -32,5 +32,10 @@ Este projeto envolve o desenvolvimento de um sistema de gerenciamento para farm√
 
 https://pharmacy-management-system-1-iavo.onrender.com
 
+E-mail: engenhariadesoftware403@gmail.com
+
+Senha: 12345678
+
+
 ## :construction: Status do Projeto
 Em desenvolvimento
