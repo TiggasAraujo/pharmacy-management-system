@@ -16,7 +16,7 @@
             "request": "launch",
             "mainClass": "br.com.farmacia.GerenciamentofarmaciaApplication",
             "projectName": "gerenciamentofarmacia",
-            "vmArgs": "-Dspring.mail.password=wngqcxxeypkrpbuv"
+            "vmArgs": "-Dspring.mail.password=wngqcxxeypkrpbuv -DDATABASE_URL=jdbc:postgresql://dpg-crb0ebtsvqrc73es9i0g-a.oregon-postgres.render.com:5432/farmacies -DDATABAE_USERNAME=admin -DDATBASE_PASSWORD=S717AIOxermmCTBk9Ho3ZXdozHHueOzg"
         }
     ]
 }
