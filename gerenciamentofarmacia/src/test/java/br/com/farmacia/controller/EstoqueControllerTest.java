@@ -139,7 +139,7 @@ public class EstoqueControllerTest {
    public void removerEstoque() throws Exception {
       Long id = 1L;
       this.mockMvc.perform(MockMvcRequestBuilders.get("/remover/{id}", new Object[]{id})).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/estoques-adicionados"));
-      ((EstoqueService)Mockito.verify(this.estoqueService)).deleteById(id);
+      ((EstoqueService)Mockito.verify(this.estoqueService)).deleteByid(id);
    }
 
    @Test

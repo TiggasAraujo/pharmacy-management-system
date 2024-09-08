@@ -89,7 +89,7 @@ public class EstoqueController {
 
     @GetMapping("/remover/{id}")
     public String removerEstoque(@PathVariable("id") Long id) {
-        estoqueService.deleteById(id);
+        estoqueService.deleteByid(id);
         return "redirect:/estoques-adicionados";
     }
 

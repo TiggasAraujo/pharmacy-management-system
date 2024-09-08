@@ -19,13 +19,8 @@ public class EstoqueService {
         this.estoqueRepository.save(estoque);
     }
 
-    //Refactor -- replace error with Exception
-    //Inserção de exceção
-    public void deleteById(Long id) {
-        if (!estoqueRepository.existsById(id)) {
-            throw new IllegalArgumentException("Estoque não encontrado com id: " + id);
-        }
-        estoqueRepository.deleteById(id);
+    public void deleteByid(Long id) {
+        this.estoqueRepository.deleteById(id);
     }
     public Optional<Estoque> findById(Long id) {
         return this.estoqueRepository.findById(id);
