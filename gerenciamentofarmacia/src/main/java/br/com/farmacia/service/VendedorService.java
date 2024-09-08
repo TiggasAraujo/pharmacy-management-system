@@ -18,9 +18,13 @@ public class VendedorService {
 
     public VendedorService() {
     }
+
+    //Refactor -- remove dead code
+    //Método nunca usado e efetua a mesma função que buscarTodosVendedores
+    /*
     public List<Vendedor> listarTodos() {
         return vendedorRepository.findAll();
-    }
+    }*/
 
     public void salvar(Vendedor vendedor) {
         vendedorRepository.save(vendedor);
@@ -30,18 +34,26 @@ public class VendedorService {
         return vendedorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Vendedor não encontrado"));
     }
 
+    //refactor -- replace error with exception
     public void excluir(Long id) {
-        vendedorRepository.deleteById(id);
+        if (!vendedorRepository.existsById(id)) {
+            throw new IllegalArgumentException("Vendedor não encontrado com id: " + id);
+        }
     }
 
+
+    //refactor -- remove dead code
+    /*findAll exerce a mesma função
     public Object findAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
+    }*/
+
+
 
     public List<Vendedor> buscarTodosVendedores() {
         return vendedorRepository.findAll();
     }
-
-    
 }
+
+
