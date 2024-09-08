@@ -123,7 +123,7 @@ public class EstoqueControllerTest {
 //       Mockito.when(this.estoqueService.getById(1L)).thenReturn(estoqueExistente);
 //       Mockito.when(this.medicamentoService.findAll()).thenReturn(Arrays.asList(medicamento));
 
-//       this.mockMvc.perform(MockMvcRequestBuilders.post("/editar", 
+//       this.mockMvc.perform(MockMvcRequestBuilders.post("/editar",
 //       new Object[0]).param("id", new String[]{"1"})
 //       .param("quantidade", new String[]{"100"}).param("medicamentoid", new String[]{"1"})
 //       .with(SecurityMockMvcRequestPostProcessors.csrf()))
@@ -139,7 +139,7 @@ public class EstoqueControllerTest {
    public void removerEstoque() throws Exception {
       Long id = 1L;
       this.mockMvc.perform(MockMvcRequestBuilders.get("/remover/{id}", new Object[]{id})).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/estoques-adicionados"));
-      ((EstoqueService)Mockito.verify(this.estoqueService)).deleteByid(id);
+      ((EstoqueService)Mockito.verify(this.estoqueService)).deleteById(id);
    }
 
    @Test

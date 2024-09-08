@@ -41,7 +41,7 @@ public class EstoqueServiceTest {
     public void testDeleteById() {
         Long estoqueId = 1L;
 
-        estoqueService.deleteByid(estoqueId);
+        estoqueService.deleteById(estoqueId);
 
         Mockito.verify(estoqueRepository, Mockito.times(1)).deleteById(estoqueId);
     }
