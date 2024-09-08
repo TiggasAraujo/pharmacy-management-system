@@ -13,6 +13,11 @@ public class VendedorService {
     @Autowired
     private VendedorRepository vendedorRepository;
 
+    public VendedorService(VendedorRepository vendedorRepository) {
+    }
+
+    public VendedorService() {
+    }
     public List<Vendedor> listarTodos() {
         return vendedorRepository.findAll();
     }
