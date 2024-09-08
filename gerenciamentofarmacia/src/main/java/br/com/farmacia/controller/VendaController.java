@@ -41,7 +41,7 @@ public class VendaController {
         model.addAttribute("venda", venda);
         model.addAttribute("clientes", clienteService.buscarTodosClientes());
         model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
-        model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
+        model.addAttribute("medicamentos", medicamentoService.findAll());
         return "Vendas/formVendas";
     }
 
@@ -50,7 +50,7 @@ public class VendaController {
         if (result.hasErrors()) {
             model.addAttribute("clientes", clienteService.buscarTodosClientes());
             model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
-            model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
+            model.addAttribute("medicamentos", medicamentoService.findAll());
             return "Vendas/formVendas";
         }
         vendaService.salvarVenda(venda);
@@ -70,7 +70,7 @@ public class VendaController {
         model.addAttribute("venda", venda);
         model.addAttribute("clientes", clienteService.buscarTodosClientes());
         model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
-        model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
+        model.addAttribute("medicamentos", medicamentoService.findAll());
         return "Vendas/editVendas";
     }
 
@@ -81,7 +81,7 @@ public class VendaController {
             venda.setId(id);
             model.addAttribute("clientes", clienteService.buscarTodosClientes());
             model.addAttribute("vendedores", vendedorService.buscarTodosVendedores());
-            model.addAttribute("medicamentos", medicamentoService.buscarTodosMedicamentos());
+            model.addAttribute("medicamentos", medicamentoService.findAll());
             return "Vendas/editVendas";
         }
         vendaService.salvarVenda(venda);
