@@ -20,7 +20,7 @@ public class VendedorController {
 
     @GetMapping
     public String listarVendedores(Model model) {
-        List<Vendedor> vendedores = vendedorService.listarTodos();
+        List<Vendedor> vendedores = vendedorService.buscarTodosVendedores();
         model.addAttribute("vendedores", vendedores);
         return "vendedor/listaVendedores";
     }

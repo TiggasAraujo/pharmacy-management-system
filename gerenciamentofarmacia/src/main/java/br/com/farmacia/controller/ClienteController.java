@@ -25,7 +25,7 @@ public class ClienteController {
     @GetMapping("/clientes")
     public ModelAndView listarClientes() {
         ModelAndView modelAndView = new ModelAndView("Cliente/listaClientes");
-        List<Cliente> clientes = clienteService.listarClientes();
+        List<Cliente> clientes = clienteService.buscarTodosClientes();
         modelAndView.addObject("clientes", clientes);
         return modelAndView;
     }
@@ -49,7 +49,7 @@ public class ClienteController {
     @GetMapping("/editarCliente")
     public ModelAndView editarCliente(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("Cliente/editarCliente");
-        Cliente cliente = clienteService.listarClientes()
+        Cliente cliente = clienteService.buscarTodosClientes()
                 .stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()
@@ -77,7 +77,7 @@ public class ClienteController {
     @GetMapping("/Cliente/{id}")
     public ModelAndView buscarClientePorId(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("Cliente/buscaCliente");
-        Cliente cliente = clienteService.listarClientes()
+        Cliente cliente = clienteService.buscarTodosClientes()
                 .stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()

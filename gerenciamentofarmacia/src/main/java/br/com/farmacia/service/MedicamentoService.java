@@ -10,36 +10,21 @@ import br.com.farmacia.repository.MedicamentoRepository;
 
 @Service
 public class MedicamentoService {
-	
-	@Autowired
+
+    @Autowired
     private MedicamentoRepository medicamentoRepository;
-
-
-    
-    //busca medicamentos faltando estoque
-    // public List<Medicamento> findSemEstoque() {
-    //     return this.medicamentoRepository.findSemEstoque();
-    // }
-
-    // ///retorna todos os medicamentos que estao no estoque
-    // public List<Medicamento> findByQtdEstoque() {
-    //     return this.medicamentoRepository.findByQtdEstoque();
-    // }
-    
-    ///retorna os medicamentos de acodo com a data de validade
-    // public List<Medicamento> findByVencimento() {
-    //     return this.medicamentoRepository.findByVencimento();
-    // }
 
     public List<Medicamento> findAll() {
         return medicamentoRepository.findAll();
     }
-    
+
     public void save(Medicamento medicamento) {
-        this.medicamentoRepository.save(medicamento);
+        medicamentoRepository.save(medicamento);
     }
+
     public Medicamento getById(Long id) {
-        return medicamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medicamento não encontrado"));
+        return medicamentoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medicamento não encontrado"));
     }
 
     public void deleteById(Long id) {
@@ -54,13 +39,16 @@ public class MedicamentoService {
         return medicamentoRepository.findById(id);
     }
 
-    public List<Medicamento> listar() {
+    //Refactoring remove dead code
+    //Os dois métodos a seguir eram redundantes, pois, no fim, retornavam todos os medicamentos, tal qual o método findAll
+    /*public List<Medicamento> listar() {
         return medicamentoRepository.findAll();
     }
 
-   
+
     public List<Medicamento> buscarTodosMedicamentos() {
         return medicamentoRepository.findAll();
-    }
+
+    }*/
 
 }

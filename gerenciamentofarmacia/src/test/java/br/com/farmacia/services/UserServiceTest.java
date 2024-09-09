@@ -99,6 +99,22 @@ public class UserServiceTest {
 
         verify(userRepository, times(1)).deleteById(userId);
     }
+
+    @Test
+    public void testFindById_UserNotFound() {
+        Long userId = 1L;
+
+        // Configura o comportamento do mock para retornar um Optional vazio
+        when(userRepository.findById(userId)).thenReturn(Optional.empty());
+
+        // Chama o método a ser testado
+        Optional<User> result = userService.findById(userId);
+
+        // Verifica se o resultado é um Optional.empty()
+        assertEquals(Optional.empty(), result);
+        verify(userRepository, times(1)).findById(userId);
+    }
+
 }
 
 

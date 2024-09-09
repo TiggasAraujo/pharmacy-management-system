@@ -22,7 +22,6 @@ public class EstoqueService {
     public void deleteByid(Long id) {
         this.estoqueRepository.deleteById(id);
     }
-
     public Optional<Estoque> findById(Long id) {
         return this.estoqueRepository.findById(id);
     }
@@ -35,8 +34,10 @@ public class EstoqueService {
         return this.estoqueRepository.findById(id).get();
     }
 
+    //Refactor -- remove dead code
+    //Método executa  mesma função que save e nunca é chamado
+    /*
     public void salvarEstoque(Estoque estoque) {
         estoqueRepository.save(estoque);
-    }
-
+    }*/
 }

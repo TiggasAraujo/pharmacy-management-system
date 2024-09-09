@@ -108,7 +108,7 @@ public class ClienteControllerTest {
 
         List<Cliente> clientes = Arrays.asList(cliente1, cliente2);
 
-        Mockito.when(clienteService.listarClientes()).thenReturn(clientes);
+        Mockito.when(clienteService.buscarTodosClientes()).thenReturn(clientes);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/clientes"))
             .andExpect(MockMvcResultMatchers.status().isOk())
