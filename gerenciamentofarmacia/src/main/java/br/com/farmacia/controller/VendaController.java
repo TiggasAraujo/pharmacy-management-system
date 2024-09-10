@@ -1,9 +1,7 @@
 package br.com.farmacia.controller;
 
-import br.com.farmacia.models.Cliente;
 import br.com.farmacia.models.ItemVenda;
 import br.com.farmacia.models.Venda;
-import br.com.farmacia.models.Vendedor;
 import br.com.farmacia.service.ClienteService;
 import br.com.farmacia.service.MedicamentoService;
 import br.com.farmacia.service.VendaService;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.validation.Valid;
 import java.util.List;
