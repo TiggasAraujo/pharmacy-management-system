@@ -38,32 +38,32 @@ public class ClienteService {
         }
     }
 
-    //Refactor -- replace conditional with polymorfism
-    //Inserção de excessão para evitar uso de if e else
+    // Refactor -- replace error with exception
+    // Inserção de exceção para evitar uso de if e else
     public void removerCliente(Long id) {
         if (!clienteRepository.existsById(id)) {
             throw new ResourceNotFoundException("Cliente não encontrado com id: " + id);
         }
         clienteRepository.deleteById(id);
     }
-    //Refactoring remove dead code
-    //Método tem a mesma função que findAll, portanto é redundante
-    /*public List<Cliente> listarClientes() {
-        return clienteRepository.findAll();
-    }*/
+
+    // Refactoring remove dead code
+    // Método tem a mesma função que findAll, portanto é redundante
+    /*
+     * public List<Cliente> listarClientes() {
+     * return clienteRepository.findAll();
+     * }
+     */
 
     public List<Venda> getHistoricoCompras(Long clienteId) {
         return vendaRepository.findByClienteId(clienteId);
     }
 
-
-    //Refactoring -- remove dead code
-    //Método tem a mesma função que listarClientes, portanto é redundante
-    //public Object findAll() {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    // Refactoring -- remove dead code
+    // Método tem a mesma função que listarClientes, portanto é redundante
+    // public Object findAll() {
+    // throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     // }
-
 
     public List<Cliente> buscarTodosClientes() {
         return clienteRepository.findAll();

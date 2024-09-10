@@ -8,8 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
 public class VendedorServiceTest {
 
     @Autowired
@@ -61,7 +59,6 @@ public class VendedorServiceTest {
         vendedor.setNome("Fernanda");
         vendedor.setCpf("12345678900");
 
-
         try {
             vendedorRepository.save(vendedor);
 
@@ -70,12 +67,10 @@ public class VendedorServiceTest {
             Assertions.assertNotNull(savedVendedor);
             Assertions.assertEquals("Fernanda", savedVendedor.getNome());
             Assertions.assertEquals("12345678900", savedVendedor.getCpf());
-        }  catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Vendedor não existe");
         }
-
     }
-
 
     @Test
     public void testExcluirVendedor() {
@@ -83,7 +78,6 @@ public class VendedorServiceTest {
         vendedor.setNome("Pedro");
 
         try {
-
             vendedorRepository.save(vendedor);
 
             vendedorService.excluir(vendedor.getId());
@@ -93,6 +87,4 @@ public class VendedorServiceTest {
             System.out.println("Vendedor não existe");
         }
     }
-
 }
-
