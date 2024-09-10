@@ -1,11 +1,9 @@
 package br.com.farmacia.controller;
 
 import br.com.farmacia.models.Cliente;
-import br.com.farmacia.models.Venda;
 import br.com.farmacia.service.ClienteService;
 import br.com.farmacia.service.VendaService;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -30,9 +28,6 @@ public class ClienteControllerTest {
 
     @MockBean
     private ClienteService clienteService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private Cliente cliente;
 

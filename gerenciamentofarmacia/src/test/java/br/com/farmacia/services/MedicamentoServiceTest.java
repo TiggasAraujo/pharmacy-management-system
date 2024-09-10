@@ -4,17 +4,13 @@ import br.com.farmacia.models.Estoque;
 import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.repository.MedicamentoRepository;
 import br.com.farmacia.service.MedicamentoService;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class MedicamentoServiceTest {

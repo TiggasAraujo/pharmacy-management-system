@@ -1,11 +1,7 @@
 package br.com.farmacia.services;
 
 
-import br.com.farmacia.models.Cliente;
-import br.com.farmacia.models.ItemVenda;
-import br.com.farmacia.models.Medicamento;
 import br.com.farmacia.models.Venda;
-import br.com.farmacia.models.Vendedor;
 import br.com.farmacia.repository.VendaRepository;
 import br.com.farmacia.service.MedicamentoService;
 import br.com.farmacia.service.VendaService;
@@ -16,8 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;

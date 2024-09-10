@@ -37,7 +37,6 @@ public class PromocaoServiceTest {
 
     private Promocao promocao;
     private Medicamento medicamento;
-    private Cliente cliente;
 
     @BeforeEach
     public void setUp() {
